@@ -28,7 +28,7 @@ class Gameboard {
   receiveAttack(x, y) {
     const target = this.grid[y][x];
     if (target === null) {
-      this.missedAttacks.push([y, x]);
+      this.missedAttacks.push([x, y]);
       return false;
     } else {
       target.hit();
@@ -38,7 +38,7 @@ class Gameboard {
   allShipsSunk() {
     let allShipsSunk = true;
     for (let i = 0; i < this.ships.length; i++) {
-      if (!this.ships[i].isSunk()) {
+      if (!this.ships[i].ship.isSunk()) {
         allShipsSunk = false;
       }
     }
