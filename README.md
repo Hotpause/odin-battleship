@@ -1,1 +1,1 @@
-# odin-todo
+# odin-battleship
