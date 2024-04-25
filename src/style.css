@@ -40,7 +40,7 @@
   background-color: red; /* Color for hit cells */
 }
 
-.row .cell.miss {
+.miss {
   background-color: yellow; /* Color for miss cells */
 }
 

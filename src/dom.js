@@ -12,6 +12,9 @@ const renderboard = (gameboard, elementid) => {
       const cellelement = document.createElement("div");
       cellelement.className = "cell";
 
+      // Add text to display coordinates
+      cellelement.textContent = `${rowindex},${cellindex}`;
+
       if (cell.status === "ship" && cell.attacked) {
         // Hit
         cellelement.classList.add("hit");
@@ -22,12 +25,16 @@ const renderboard = (gameboard, elementid) => {
         // Ship (not hit)
         cellelement.classList.add("ship");
       }
-      console.log(
-        `Row: ${rowindex}, Cell: ${cellindex}, Status: ${cell.status}, Attacked: ${cell.attacked}`
-      );
+
+      if (cell.attacked) {
+        console.log(
+          `Row: ${rowindex}, Cell: ${cellindex}, Status: ${cell.status}, Attacked: ${cell.attacked}`
+        );
+      }
 
       rowelement.appendChild(cellelement);
     });
+
     container.appendChild(rowelement);
   });
 };

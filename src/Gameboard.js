@@ -40,23 +40,30 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
+    console.log(`Receiving attack at ${y},${x}`);
     let cell = this.grid[y][x];
 
     if (cell.attacked) {
+      console.log(`Cell ${y},${x} already attacked`);
       return false;
     }
 
     cell.attacked = true;
+    console.log(`Cell ${y},${x} attacked`);
+
     if (cell.status === "ship") {
       cell.ship.hit();
+      console.log(`Ship hit at ${y},${x}`);
     }
 
     if (cell.status === null) {
       this.missedAttacks.push([x, y]);
+      console.log(`Miss at ${y},${x}`);
     }
 
     return true;
   }
+
   allShipsSunk() {
     let allShipsSunk = true;
     for (let i = 0; i < this.ships.length; i++) {

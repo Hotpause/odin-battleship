@@ -7,8 +7,8 @@ import renderboard from "./dom";
 const player = new Player();
 const computer = new Player();
 
-let playerattackedcells = new Set();
-let computerattackedcells = new Set();
+let playersattackedcells = new Set();
+let computersattackedcells = new Set();
 
 player.placeShip(0, 0, 5, true);
 player.placeShip(2, 2, 4, false);
@@ -21,11 +21,11 @@ renderboard(computer.gameboard, "computerBoard");
 let currentplayer = player;
 
 const handleattack = (x, y) => {
-  if (computerattackedcells.has(`${x},${y}`)) {
-    console.error("You've already attacked this cell:", x, y);
+  if (computersattackedcells.has(`${x},${y}`)) {
+    console.error("You've already attacked this cell:", y, x);
     return;
   } else computer.receiveAttack(x, y);
-  computerattackedcells.add(`${x},${y}`);
+  computersattackedcells.add(`${x},${y}`);
 
   currentplayer = currentplayer === player ? computer : player;
 
@@ -34,7 +34,7 @@ const handleattack = (x, y) => {
 
   checkwinner();
   computersturn();
-  console.log("valid coordinates:", x, y);
+  console.log("valid coordinates:", y, x);
 };
 
 const computersturn = () => {
@@ -43,11 +43,13 @@ const computersturn = () => {
   do {
     x = Math.floor(Math.random() * 10);
     y = Math.floor(Math.random() * 10);
-  } while (playerattackedcells.has(`${x},${y}`));
+  } while (playersattackedcells.has(`${x},${y}`));
 
-  playerattackedcells.add(`${x},${y}`);
+  playersattackedcells.add(`${x},${y}`);
   player.receiveAttack(x, y);
-  console.log("computer attacked", x, y);
+  console.log("computer attacked", y, x);
+  renderboard(player.gameboard, "playerBoard");
+  renderboard(computer.gameboard, "computerBoard");
 };
 
 const checkwinner = () => {
@@ -70,7 +72,7 @@ document.getElementById("computerBoard").addEventListener("click", (event) => {
     if (rowindex >= 0 && rowindex < 10 && cellindex >= 0 && cellindex < 10) {
       handleattack(cellindex, rowindex);
     } else {
-      console.error("Invalid coordinates:", cellindex, rowindex);
+      console.error("Invalid coordinates:", rowindex, cellindex);
     }
     event.stopPropagation();
   }
