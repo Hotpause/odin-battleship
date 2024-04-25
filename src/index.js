@@ -21,6 +21,7 @@ renderboard(computer.gameboard, "computerBoard");
 let currentplayer = player;
 
 const handleattack = (x, y) => {
+  console.log("******** players turn ********");
   if (computersattackedcells.has(`${x},${y}`)) {
     console.error("You've already attacked this cell:", y, x);
     return;
@@ -32,12 +33,13 @@ const handleattack = (x, y) => {
   renderboard(player.gameboard, "playerBoard");
   renderboard(computer.gameboard, "computerBoard");
 
-  checkwinner();
   computersturn();
   console.log("valid coordinates:", y, x);
+  checkwinner();
 };
 
 const computersturn = () => {
+  console.log("******* computers turn *******");
   let x, y;
 
   do {
@@ -50,12 +52,13 @@ const computersturn = () => {
   console.log("computer attacked", y, x);
   renderboard(player.gameboard, "playerBoard");
   renderboard(computer.gameboard, "computerBoard");
+  checkwinner();
 };
 
 const checkwinner = () => {
-  if (computer.allShipsSunk()) {
-    alert("player Wins");
-  } else if (player.allShipsSunk()) {
+  if (computer.gameboard.allShipsSunk()) {
+    alert("Player Wins");
+  } else if (player.gameboard.allShipsSunk()) {
     alert("Computer Wins");
   }
 };

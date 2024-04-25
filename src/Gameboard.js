@@ -5,12 +5,15 @@ class Gameboard {
     this.grid = Array(10)
       .fill(null)
       .map(() =>
-        Array(10).fill({
-          ship: null,
-          status: null,
-          attacked: false,
-        })
+        Array(10)
+          .fill(null)
+          .map(() => ({
+            ship: null,
+            status: null,
+            attacked: false,
+          }))
       );
+
     this.ships = [];
     this.missedAttacks = [];
   }
@@ -69,6 +72,7 @@ class Gameboard {
     for (let i = 0; i < this.ships.length; i++) {
       if (!this.ships[i].ship.isSunk()) {
         allShipsSunk = false;
+        break;
       }
     }
     return allShipsSunk;
