@@ -1,0 +1,49 @@
+.game-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.board-container {
+  width: 45%;
+}
+
+.gameboard {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid black;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  align-items: center;
+  width: 35px;
+  gap: 5px;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  margin: 0; /* Remove any margin */
+  box-sizing: border-box;
+}
+
+.ship {
+  background-color: grey; /* Default color for ships that haven't been attacked */
+}
+
+.hit {
+  background-color: red; /* Color for hit cells */
+}
+
+.row .cell.miss {
+  background-color: yellow; /* Color for miss cells */
+}
+
+.sunk {
+  background-color: red; /* Color for sunk ships */
+}

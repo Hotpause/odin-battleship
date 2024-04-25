@@ -4,7 +4,13 @@ class Gameboard {
   constructor() {
     this.grid = Array(10)
       .fill(null)
-      .map(() => Array(10).fill(null));
+      .map(() =>
+        Array(10).fill({
+          ship: null,
+          status: null,
+          attacked: false,
+        })
+      );
     this.ships = [];
     this.missedAttacks = [];
   }
@@ -15,10 +21,18 @@ class Gameboard {
 
     for (let i = 0; i < length; i++) {
       if (isHorizontal) {
-        this.grid[y][x + i] = ship;
+        this.grid[y][x + i] = {
+          ship: ship,
+          status: "ship",
+          attacked: false,
+        };
         shipCoordinates.push([y, x + i]);
       } else {
-        this.grid[y + i][x] = ship;
+        this.grid[y + i][x] = {
+          ship: ship,
+          status: "ship",
+          attacked: false,
+        };
         shipCoordinates.push([y + i, x]);
       }
     }
@@ -26,14 +40,22 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
-    const target = this.grid[y][x];
-    if (target === null) {
-      this.missedAttacks.push([x, y]);
+    let cell = this.grid[y][x];
+
+    if (cell.attacked) {
       return false;
-    } else {
-      target.hit();
-      return true;
     }
+
+    cell.attacked = true;
+    if (cell.status === "ship") {
+      cell.ship.hit();
+    }
+
+    if (cell.status === null) {
+      this.missedAttacks.push([x, y]);
+    }
+
+    return true;
   }
   allShipsSunk() {
     let allShipsSunk = true;

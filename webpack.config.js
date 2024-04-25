@@ -11,6 +11,7 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     watchFiles: ["src/index.html"],
+    static: "./dist",
   },
 
   module: {
