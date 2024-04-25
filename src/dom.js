@@ -11,8 +11,6 @@ const renderboard = (gameboard, elementid) => {
     row.forEach((cell, cellindex) => {
       const cellelement = document.createElement("div");
       cellelement.className = "cell";
-
-      // Add text to display coordinates
       cellelement.textContent = `${rowindex},${cellindex}`;
 
       if (cell.status === "ship" && cell.attacked) {
@@ -25,8 +23,7 @@ const renderboard = (gameboard, elementid) => {
         // Ship (not hit)
         cellelement.classList.add("ship");
       }
-
-      if (cell.attacked) {
+      if (cell.attackedss) {
         console.log(
           `Row: ${rowindex}, Cell: ${cellindex}, Status: ${cell.status}, Attacked: ${cell.attacked}`
         );
@@ -34,7 +31,6 @@ const renderboard = (gameboard, elementid) => {
 
       rowelement.appendChild(cellelement);
     });
-
     container.appendChild(rowelement);
   });
 };
