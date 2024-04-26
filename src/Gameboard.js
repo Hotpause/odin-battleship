@@ -17,6 +17,43 @@ class Gameboard {
     this.ships = [];
     this.missedAttacks = [];
   }
+  clearShips() {
+    // Reset the grid to remove all ships
+    this.grid.forEach((row) => {
+      row.forEach((cell) => {
+        cell.ship = null;
+        cell.status = null;
+        cell.attacked = false;
+      });
+    });
+
+    // Clear the ships array
+    this.ships = [];
+  }
+  isValidShipPlacement(x, y, length, isHorizontal) {
+    // Check if the ship fits within the gameboard
+    if (
+      (isHorizontal && x + length > 10) ||
+      (!isHorizontal && y + length > 10)
+    ) {
+      return false;
+    }
+
+    // Check if any cell in the path of the ship is already occupied
+    for (let i = 0; i < length; i++) {
+      if (isHorizontal) {
+        if (this.grid[y][x + i].status === "ship") {
+          return false;
+        }
+      } else {
+        if (this.grid[y + i][x].status === "ship") {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
 
   placeShip(x, y, length, isHorizontal) {
     const ship = new Ship(length);

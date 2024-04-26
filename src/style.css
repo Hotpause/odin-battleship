@@ -16,6 +16,7 @@ body {
 }
 
 .board-container {
+  background-color: transparent;
   border: 2px solid red;
 
   width: 45%;
@@ -26,9 +27,9 @@ body {
   display: grid;
   grid-template-columns: repeat(10, 50px);
   gap: 5px;
+  background-color: transparent;
   border: 1px solid orange;
   justify-content: center;
-  background-color: #fff; /* Background color for the gameboard */
 }
 
 .row {
@@ -50,8 +51,10 @@ h2 {
 .cell {
   width: 50px;
   height: 50px;
+  border-radius: 2px;
   border: 1px solid black;
   box-sizing: border-box;
+  background-color: aliceblue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,4 +79,25 @@ h2 {
 
 .sunk {
   background-color: darkred; /* Dark red color for sunk ships */
+}
+
+#computerBoard .cell.ship {
+  background-color: aliceblue; /* Match the color of other cells */
+}
+
+#randomizeButton {
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  margin-left: 90px;
+  padding: 10px 20px; /* Add padding */
+  font-size: 16px; /* Increase font size */
+  cursor: pointer; /* Add pointer cursor on hover */
+  border-radius: 5px; /* Add border radius */
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
+}
+
+/* Hover effect for the randomize button */
+#randomizeButton:hover {
+  background-color: #45a049; /* Darker green on hover */
 }

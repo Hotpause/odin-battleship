@@ -10,10 +10,13 @@ const computer = new Player();
 let playersattackedcells = new Set();
 let computersattackedcells = new Set();
 
-player.placeShip(0, 0, 5, true);
-player.placeShip(2, 2, 4, false);
-computer.placeShip(1, 2, 5, true);
-computer.placeShip(5, 5, 4, false);
+player.placeRandomizedShips();
+computer.placeRandomizedShips();
+
+// player.placeShip(0, 0, 5, true);
+// player.placeShip(2, 2, 4, false);
+// computer.placeShip(1, 2, 5, true);
+// computer.placeShip(5, 5, 4, false);
 
 renderboard(player.gameboard, "playerBoard");
 renderboard(computer.gameboard, "computerBoard");
@@ -21,6 +24,7 @@ renderboard(computer.gameboard, "computerBoard");
 let currentplayer = player;
 
 const handleattack = (x, y) => {
+  randomizeButton.style.display = "none";
   if (checkwinner()) {
     console.log("The game has already been won!");
     return;
@@ -95,4 +99,17 @@ document.getElementById("computerBoard").addEventListener("click", (event) => {
     }
     event.stopPropagation();
   }
+});
+const randomizeButton = document.getElementById("randomizeButton");
+
+// Add event listener to the randomize button
+randomizeButton.addEventListener("click", () => {
+  // Clear the previously placed ships on the player's board
+  player.gameboard.clearShips();
+
+  // Place new randomized ships
+  player.placeRandomizedShips();
+
+  // Render the updated player's board
+  renderboard(player.gameboard, "playerBoard");
 });
