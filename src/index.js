@@ -21,6 +21,10 @@ renderboard(computer.gameboard, "computerBoard");
 let currentplayer = player;
 
 const handleattack = (x, y) => {
+  if (checkwinner()) {
+    console.log("The game has already been won!");
+    return;
+  }
   console.log("******** players turn ********");
   if (computersattackedcells.has(`${x},${y}`)) {
     console.error("You've already attacked this cell:", y, x);
@@ -57,10 +61,22 @@ const computersturn = () => {
 
 const checkwinner = () => {
   if (computer.gameboard.allShipsSunk()) {
-    alert("Player Wins");
+    console.log("Player Wins");
+    document.getElementById("winnerMessage").textContent = "Player Wins";
+    document
+      .getElementById("computerBoard")
+      .removeEventListener("click", handleattack);
+    return true;
   } else if (player.gameboard.allShipsSunk()) {
-    alert("Computer Wins");
+    console.log("Computer Wins");
+    document.getElementById("winnerMessage").textContent = "Computer Wins";
+    document
+      .getElementById("computerBoard")
+      .removeEventListener("click", handleattack);
+    return true;
   }
+
+  return false; // No winner yet
 };
 
 document.getElementById("computerBoard").addEventListener("click", (event) => {
