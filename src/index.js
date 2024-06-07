@@ -13,11 +13,6 @@ let computersattackedcells = new Set();
 player.placeRandomizedShips();
 computer.placeRandomizedShips();
 
-// player.placeShip(0, 0, 5, true);
-// player.placeShip(2, 2, 4, false);
-// computer.placeShip(1, 2, 5, true);
-// computer.placeShip(5, 5, 4, false);
-
 renderboard(player.gameboard, "playerBoard");
 renderboard(computer.gameboard, "computerBoard");
 
@@ -66,14 +61,16 @@ const computersturn = () => {
 const checkwinner = () => {
   if (computer.gameboard.allShipsSunk()) {
     console.log("Player Wins");
-    document.getElementById("winnerMessage").textContent = "Player Wins";
+    document.getElementById("winnerMessage1").textContent = "Player Wins";
+    document.getElementById("winnerMessage1").classList.add("show");
     document
       .getElementById("computerBoard")
       .removeEventListener("click", handleattack);
     return true;
   } else if (player.gameboard.allShipsSunk()) {
     console.log("Computer Wins");
-    document.getElementById("winnerMessage").textContent = "Computer Wins";
+    document.getElementById("winnerMessage1").textContent = "Computer Wins";
+    document.getElementById("winnerMessage1").classList.add("show");
     document
       .getElementById("computerBoard")
       .removeEventListener("click", handleattack);
@@ -100,16 +97,11 @@ document.getElementById("computerBoard").addEventListener("click", (event) => {
     event.stopPropagation();
   }
 });
+
 const randomizeButton = document.getElementById("randomizeButton");
 
-// Add event listener to the randomize button
 randomizeButton.addEventListener("click", () => {
-  // Clear the previously placed ships on the player's board
   player.gameboard.clearShips();
-
-  // Place new randomized ships
   player.placeRandomizedShips();
-
-  // Render the updated player's board
   renderboard(player.gameboard, "playerBoard");
 });

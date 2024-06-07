@@ -7,6 +7,33 @@ body {
   background-repeat: repeat; /* Prevent the background image from repeating */
   background-position: center center; /* Center the background image */
 }
+/* Instructions container styles */
+.instructions-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30%; /* Width is perfect */
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure it is above other elements */
+  display: flex;
+  flex-direction: column; /* Column layout */
+  align-items: flex-start; /* Left align items */
+}
+
+.instructions-container h2 {
+  margin-top: 0;
+  margin-right: 20px; /* Add some space between title and instructions */
+  color: #333;
+}
+
+.instructions-container p {
+  margin: 2px 0; /* Add margin between paragraphs */
+  color: #555;
+  text-align: left; /* Left align text */
+}
 
 .game-container {
   display: flex;
@@ -100,4 +127,29 @@ h2 {
 /* Hover effect for the randomize button */
 #randomizeButton:hover {
   background-color: #45a049; /* Darker green on hover */
+}
+
+/* Winner message styles */
+#winnerMessage1 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  z-index: 1100; /* Ensure it is above other elements */
+  font-size: 2rem;
+  display: none;
+}
+
+#winnerMessage1.show {
+  display: block;
+}
+
+#winnerMessage1 h1 {
+  margin: 0;
 }

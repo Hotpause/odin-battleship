@@ -11,7 +11,7 @@ const renderboard = (gameboard, elementid) => {
     row.forEach((cell, cellindex) => {
       const cellelement = document.createElement("div");
       cellelement.className = "cell";
-      cellelement.textContent = `${rowindex},${cellindex}`;
+      // cellelement.textContent = `${rowindex},${cellindex}`;
 
       if (cell.status === "ship" && cell.attacked) {
         // Hit
